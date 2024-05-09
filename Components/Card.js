@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text} from 'react-native'
 
+
 const Card = () => {
   return (
    <View style={styles.card}>
@@ -13,17 +14,27 @@ const Card = () => {
 
 const styles = StyleSheet.create({
     card: {
-        width: 400,
-        height: 270,
+        width: 380,
+        height: 260,
         backgroundColor: '#3b70f9',
-        borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center'
+        borderRadius: 18,
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        marginTop: 38,
+        shadowColor: '#000',
+    shadowOpacity: 0.2, 
+    shadowRadius: 5,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    elevation: 5, 
     },
     texto: {
         fontSize: 20,
         color: '#f5f8ff',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginBottom: 10
     }
 })
 export default Card

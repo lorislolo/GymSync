@@ -1,25 +1,25 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Card from './Card';
+import Card1 from './Card1';
 import Header from './Header';
 
 const Body = () =>{
   return (
-    <View>
-        <Header/>
-    
     <View style={styles.container}>
+      <Header/>
         <Card/>
-        </View>
+        <Card1/>
     </View>
+
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f5f8ff',
+    flex: '1',
+    backgroundColor: '#e9edf7',
     alignItems: 'center',
-    justifyContent: 'center',
-    height:'100%'
+    height: 800
   },
 });
 
