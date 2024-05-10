@@ -1,51 +1,61 @@
-import Body from './Components/Body';
-import Header from './Components/Header';
-import { View, Image } from 'react-native-web';
+import React from 'react';
+import { Image, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Body from './Components/Body'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
 
-
-const MainNavigator = () => {
+function SettingsScreen() {
   return (
-    <Tab.Navigator screenOptions={{
-      headerStyle: { backgroundColor: '#000' },
-      headerTitleStyle: { color: "#FFF" },
-      tabBarShowLabel: false
-    }}>
-      <Tab.Screen
-        name="Home"
-        component={Body}
-        options={{
-          headerShown: false,
-          tabBarIcon: () => (
-          <Image source={require('./assets/favicon.png')} />
-          )
-        }}
-      />
-    </Tab.Navigator>
-  )
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <Text>Settings!</Text>
+    </View>
+  );
 }
 
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <View style={{ flex: 1 }}>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={Body} options={{ headerShown: false }} />
-        </Stack.Navigator>
-      </View>
-      <Stack.Screen
-          name="Main"
-          component={MainNavigator}
-          options={{
-            headerShown: false
-      }}/>
-    </NavigationContainer>
+    <Tab.Navigator 
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
+  
+          if (route.name === 'Home') {
+            iconName = focused
+              ? 'ios-information-circle'
+              : 'ios-information-circle-outline';
+          } else if (route.name === 'Settings') {
+            iconName = focused ? 'ios-list' : 'ios-list-outline';
+          }
+          
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+      })}
+      tabBarShowLabel={false} 
+    >
+      <Tab.Screen
+        name="Body"
+        component={Body}
+        options={{
+          headerShown: false,
+          tabBarIcon: () => (
+            <Image style={{width: 24, height: 24}} source={require('./assets/home.png')} />
+          ),
+          tabBarLabel: 'Home',
+          color: '#3b70f9'
+        }}
+      />
+      
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+      />
+    </Tab.Navigator>
+  </NavigationContainer>
+  
   );
 }
-
