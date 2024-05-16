@@ -49,7 +49,7 @@ export default function App() {
           color: '#3b70f9'
         }}
       />
-      
+      a
       <Tab.Screen
         name="Settings"
         component={SettingsScreen}
