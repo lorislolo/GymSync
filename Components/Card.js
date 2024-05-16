@@ -1,12 +1,15 @@
-import {View, StyleSheet, Text, Image} from 'react-native'
-
+import {View, StyleSheet, Text} from 'react-native'
+import Button from './Button'
 
 const Card = () => {
   return (
     <View style={styles.card}>
-      <Image style={styles.img} source={require('../assets/gymPic.jpg')}/>
       <View style={styles.posicao}>
-        <Text style={styles.texto}>Seja bem-vindo!</Text>
+        <Text style={styles.texto}>Adicione uma nota</Text>
+      </View>
+
+      <View>
+      <Button title={'Adicionar uma nota'} />
       </View>
     </View>
   )
@@ -15,12 +18,12 @@ const Card = () => {
 const styles = StyleSheet.create({
   card: {
     width: 380,
-    height: 260,
+    height:100,
     backgroundColor: '#3b70f9',
     borderRadius: 18,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 38,
+    marginTop: 15,
     shadowColor: '#000',
     shadowOpacity: 0.2, 
     shadowRadius: 5,
@@ -34,14 +37,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#f5f8ff',
     textAlign: 'center',
-    marginBottom: 10
-  },
-  img: {
-    width: '100%',
-    height: 229, 
-    resizeMode: 'cover',
-    borderTopLeftRadius: 18,
-    borderTopRightRadius: 18,
+    marginTop: 40,
+    marginBottom: 20,
+    fontWeight: 500
   }
 });
 

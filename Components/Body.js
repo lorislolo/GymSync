@@ -1,16 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Card from './Card';
-import Card1 from './Card1';
-import Header from './Header';
+import CardComplete from './CardComplete';
+import CardToDo from './CardToDo';
 
 const Body = () =>{
   return (
     <View style={styles.container}>
-      <Header/>
         <Card/>
-        <Card1/>
+        <CardComplete/>
+        <CardToDo/>
     </View>
-
   );
 }
 
