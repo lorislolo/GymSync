@@ -46,6 +46,12 @@ const Button = () => {
             <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
               <Text style={styles.submitButtonText}>Adicionar</Text>
             </TouchableOpacity>
+            <Pressable
+              style={styles.submitButton}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.submitButtonText}>Fechar</Text>
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -94,6 +100,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 5,
     alignItems: "center",
+    marginVertical: 2
   },
   submitButtonText: {
     color: "#fff",

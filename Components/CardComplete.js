@@ -7,7 +7,6 @@ const CardComplete = () => {
     { id: '1', task: 'Tarefa 1' },
     { id: '2', task: 'Tarefa 2' },
     { id: '3', task: 'Tarefa 3' },
-    // Adicione suas tarefas concluídas aqui
   ];
 
   const renderItem = ({ item }) => (
@@ -17,7 +16,7 @@ const CardComplete = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <View>
       <Pressable onPress={() => setModalVisible(true)}>
         <View style={styles.card}>
           <View style={styles.posicao}>
@@ -26,13 +25,14 @@ const CardComplete = () => {
         </View>
       </Pressable>
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
           setModalVisible(false);
         }}
       >
+        <View  style={styles.modalContainer}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Lista de Tarefas Concluídas</Text>
@@ -49,17 +49,13 @@ const CardComplete = () => {
             </Pressable>
           </View>
         </View>
+        </View>
       </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   card: {
     width: 380,
     height: 80,
@@ -97,7 +93,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
-    alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -108,9 +103,10 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 5,
     padding: 10,
     elevation: 2,
+    width: '100%'
   },
   buttonClose: {
     backgroundColor: '#2196F3',
@@ -127,14 +123,21 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#e9edf7',
     padding: 20,
     marginVertical: 8,
-    marginHorizontal: 16,
-    borderRadius: 10,
+    borderRadius: 5,
+    width: '100%'
   },
   itemText: {
     fontSize: 18,
+    fontWeight: '500'
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
   },
 });
 
