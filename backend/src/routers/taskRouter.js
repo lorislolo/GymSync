@@ -1,28 +1,17 @@
 import express from 'express'
 
+import getById from '../controllers/task/getById.js'
+import listAll from '../controllers/task/listAll.js'
+import create from '../controllers/task/create.js'
+import edit from '../controllers/task/update.js'
+import remove from '../controllers/task/remove.js'
+
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    res.json({message: 'Esta é a rota /task/'})
-})
-
-router.get('/:id', (req, res) => {
-    const id = req.params.id
-    res.json({message: 'Esta é a rota /task/:id '+'ID = '+id})
-})
-
-router.post('/', (req, res) => {
-    const task = req.body
-    res.json({message: 'Esta é a rota POST /task/', task})
-})
-
-router.put('/', (req, res) => {
-    res.json({message: 'Esta é a rota PUT /task/'})
-})
-
-router.delete('/:id', (req, res) => {
-    const id = req.params.id
-    res.json({message: 'Esta é a rota DELETE /task/:id '+'ID = '+id})
-})
+router.get('/', listAll)
+router.get('/:id', getById)
+router.post('/', create)
+router.put('/:id', edit)
+router.delete('/:id', remove)
 
 export default router
