@@ -29,6 +29,7 @@ const listAll = async () => {
         const tasks = await prisma.task.findMany();
         return tasks;
     } catch (error) {
+        console.log(error)
         throw new Error('Ops! Erro no servidor, tente novamente!');
     }
 }
