@@ -3,18 +3,18 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "postgres"
+  url      = env("DATABASE_TYPE")
 }
 
 model Task {
-  idtask   Int      @id @default(autoincrement())
+  id   Int      @id @default(autoincrement())
   titulo   String
   conteudo String
 }
 
 model User {
-  iduser Int      @id @default(autoincrement())
+  id Int      @id @default(autoincrement())
   name   String
   email  String
   photo  String?
