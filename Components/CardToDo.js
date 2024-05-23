@@ -1,17 +1,12 @@
 import {View, StyleSheet, Text, Pressable, Modal, FlatList} from 'react-native'
 import React, { useState } from 'react';
 
-const CardToDo = () => {
+const CardToDo = ({pendingTasks}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const data = [
-    { id: '1', task: 'Tarefa 1' },
-    { id: '2', task: 'Tarefa 2' },
-    { id: '3', task: 'Tarefa 3' },
-  ];
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Text style={styles.itemText}>{item.task}</Text>
+      <Text style={styles.itemText}>{item.titulo}</Text>
     </View>
   );
 
@@ -37,7 +32,7 @@ const CardToDo = () => {
           <View style={styles.modalView}>
             <Text style={styles.modalText}>Lista de Tarefas Pendentes</Text>
             <FlatList
-              data={data}
+              data={pendingTasks}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />

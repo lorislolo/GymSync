@@ -7,8 +7,6 @@ const Body = () =>{
   return (
     <View style={styles.container}>
         <Card/>
-        <CardComplete/>
-        <CardToDo/>
     </View>
   );
 }

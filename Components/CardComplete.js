@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, Pressable, Modal, FlatList } from 'react-native';
 
-const CardComplete = () => {
+const CardComplete = ({ completedTasks }) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const data = [
-    { id: '1', task: 'Tarefa 1' },
-    { id: '2', task: 'Tarefa 2' },
-    { id: '3', task: 'Tarefa 3' },
-  ];
 
   const renderItem = ({ item }) => (
     <View style={styles.item}>
-      <Text style={styles.itemText}>{item.task}</Text>
+      <Text style={styles.itemText}>{item.titulo}</Text>
     </View>
   );
 
@@ -32,23 +27,23 @@ const CardComplete = () => {
           setModalVisible(false);
         }}
       >
-        <View  style={styles.modalContainer}>
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Text style={styles.modalText}>Lista de Tarefas Concluídas</Text>
-            <FlatList
-              data={data}
-              renderItem={renderItem}
-              keyExtractor={item => item.id}
-            />
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Fechar</Text>
-            </Pressable>
+        <View style={styles.modalContainer}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text style={styles.modalText}>Lista de Tarefas Concluídas</Text>
+              <FlatList
+                data={completedTasks}
+                renderItem={renderItem}
+                keyExtractor={item => item.id}
+              />
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.textStyle}>Fechar</Text>
+              </Pressable>
+            </View>
           </View>
-        </View>
         </View>
       </Modal>
     </View>

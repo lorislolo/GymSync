@@ -19,6 +19,8 @@ const Button = () => {
         const data = await result.json()
         console.log(data)
         if(data?.success){
+          txtTitulo.value = '';
+          txtConteudo.value = '';
         } else {
           alert(data.error)
         }
