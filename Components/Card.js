@@ -1,7 +1,9 @@
 import {View, StyleSheet, Text} from 'react-native'
 import Button from './Button'
 
+
 const Card = () => {
+  
   return (
     <View style={styles.card}>
       <View style={styles.posicao}>
@@ -43,4 +45,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Card;
+export default Card

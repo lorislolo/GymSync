@@ -1,7 +1,35 @@
 import React, { useState } from "react";
-import { Pressable, View, StyleSheet, Image, Modal, TextInput, Text, TouchableOpacity } from "react-native";
+import { Pressable, View, StyleSheet, Image, Modal, TextInput, Text, TouchableOpacity, ScrollView } from "react-native";
+
 
 const Button = () => {
+  const [txtTitulo, setTxtTitulo] = useState('')
+  const [txtConteudo, setTxtConteudo] = useState('')
+
+
+  const postTask = async () =>{
+      try{
+        const result = await fetch('https://gymsync.onrender.com/task', {
+          method: "POST",
+          headers:{
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({titulo: txtTitulo, conteudo: txtConteudo})
+        })
+        const data = await result.json()
+        console.log(data)
+        if(data?.success){
+          navigation.goBack()
+        } else {
+          alert(data.error)
+        }
+      } catch (error){
+        console.log('Error' + error.message)
+        alert(error.message)
+      }
+    } 
+
+
   const [modalVisible, setModalVisible] = useState(false);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -32,18 +60,23 @@ const Button = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>Adicionar Nota</Text>
+
             <TextInput
               style={styles.input}
               placeholder="Título"
-              onChangeText={(text) => setTitle(text)}
+              // onChangeText={(text) => setTitle(text)}
+              onChangeText={setTxtTitulo}
+              value={txtTitulo}
             />
             <TextInput
               style={[styles.input, {height: 100}]}
               placeholder="Conteúdo"
               multiline
-              onChangeText={(text) => setContent(text)}
+              // onChangeText={(text) => setContent(text)}
+              onChangeText={setTxtConteudo}
+              value={txtConteudo}
             />
-            <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
+            <TouchableOpacity onPress={() => { handleSubmit(); postTask(); }} style={styles.submitButton}>
               <Text style={styles.submitButtonText}>Adicionar</Text>
             </TouchableOpacity>
             <Pressable

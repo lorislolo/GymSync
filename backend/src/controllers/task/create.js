@@ -1,14 +1,13 @@
 import taskModel from "../../models/taskModel.js"
 import zodErrorFormat from "../../helpers/zodErrorFormat.js"
 
-
 const create = async (req, res) => {
-    try{
+    try {
         const task = req.body
-        const result = userModel.validateUserToCreate(user)
-        if(!result.success){
+        const result = taskModel.validateTaskToCreate(task)
+        if (!result.success) {
             return res.status(400).json({
-                error: `Dados de Cadastro Inválido`,
+                error: `Dados de Cadastro Inválidos`,
                 fields: zodErrorFormat(result.error)
             })
         }
@@ -20,7 +19,7 @@ const create = async (req, res) => {
     } catch (error) {
         console.log(error)
         return res.status(500).json({
-            error: 'tente novamente!'
+            error: 'Tente novamente!'
         })
     }
 }
