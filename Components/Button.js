@@ -19,7 +19,6 @@ const Button = () => {
         const data = await result.json()
         console.log(data)
         if(data?.success){
-          navigation.goBack()
         } else {
           alert(data.error)
         }

@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Text, FlatList, Switch } from 'react-native';
 
 const TaskCard = ({ task, toggleCompleted }) => {
+  // Verifica os dados da tarefa
+  console.log('Task:', task);
+
+  // Função para lidar com a alteração do interruptor
   const onToggleSwitch = () => {
     toggleCompleted(task.id);
   };
 
+  // Verifica se há uma tarefa válida
+  if (!task) {
+    return null; // Retorna nulo se não houver tarefa
+  }
+
+  // Renderiza o componente do card da tarefa
   return (
     <View style={styles.card}>
-      <Text style={styles.cardTitle}>{task.title}</Text>
-      <Text>{task.content}</Text>
+      <Text style={styles.cardTitle}>{task.titulo}</Text> 
+      <Text style={styles.cardContent}>{task.conteudo}</Text>
       <Switch
         trackColor={{ false: "#767577", true: "#81b0ff" }}
         thumbColor={task.completed ? "#f5dd4b" : "#f4f3f4"}
@@ -21,12 +31,37 @@ const TaskCard = ({ task, toggleCompleted }) => {
   );
 };
 
+
+
 const ListTasks = () => {
-  const [tasks, setTasks] = useState([
-    { id: '1', title: 'Tarefa 1', content: 'Conteúdo da tarefa 1', completed: false },
-    { id: '2', title: 'Tarefa 2', content: 'Conteúdo da tarefa 2', completed: false },
-    { id: '3', title: 'Tarefa 3', content: 'Conteúdo da tarefa 3', completed: true },
-  ]);
+  const [tasks, setTasks] = useState([]);
+
+  const getTasks = async () => {
+    try {
+      const result = await fetch('https://gymsync.onrender.com/task');
+      const data = await result.json();
+      console.log('Data from server:', data); // Adicionado para verificar os dados recebidos do servidor
+      setTasks(data);
+    } catch (error) {
+      console.log('Error fetching tasks:', error); // Adicionado para verificar erros de obtenção de dados
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetch('https://gymsync.onrender.com/task');
+        const data = await result.json();
+        console.log('Data from server:', data); // Verifica os dados recebidos do servidor
+        setTasks(data.tasks); // Ajuste para definir corretamente as tarefas no estado
+      } catch (error) {
+        console.log('Error fetching tasks:', error); // Verifica erros de obtenção de dados
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
 
   const toggleCompleted = (taskId) => {
     const updatedTasks = tasks.map(task => {
@@ -36,15 +71,10 @@ const ListTasks = () => {
       return task;
     });
 
-    setTasks(prevTasks => {
-      const taskIndex = prevTasks.findIndex(task => task.id === taskId);
-      const updatedTask = updatedTasks.find(task => task.id === taskId);
-      const tasksCopy = [...prevTasks];
-      tasksCopy.splice(taskIndex, 1);
-      tasksCopy.unshift(updatedTask);
-      return tasksCopy;
-    });
+    setTasks(updatedTasks);
   };
+
+  console.log('Tasks:', tasks); // Adicionado para verificar o estado das tarefas
 
   return (
     <View style={styles.container}>
@@ -81,6 +111,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '500',
     marginBottom: 10,
+  },
+  cardContent: {
+    fontSize: 16,
+    marginBottom: 8,
   },
 });
 
