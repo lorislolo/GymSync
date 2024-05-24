@@ -1,12 +1,11 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-import Body from './Components/Body'
+import Body from './Components/Body';
 import ListTasks from './Components/ListTasks';
-import Profile from './Components/Profile'
+import ProfileStack from './Components/ProfileStack';
 
 const Tab = createMaterialTopTabNavigator();
-
 
 export default function App() {
   return (
@@ -27,10 +26,9 @@ export default function App() {
         />
         <Tab.Screen
           name="Perfil"
-          component={Profile}
+          component={ProfileStack}
         />
       </Tab.Navigator>
     </NavigationContainer>
-
   );
 }
